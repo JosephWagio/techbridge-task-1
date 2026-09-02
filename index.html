@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechBridge — Bridging Learning to Real-World Experience</title>
+<meta name="description" content="TechBridge by Baselink Services Limited runs practical Data Analytics and Web Development programs, plus a 30-day internship that turns learning into real-world experience.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a href="#top" class="brand">
+      <img src="images/logo.png" alt="TechBridge logo" width="170" height="30">
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#internship">Internship</a>
+      <a href="#apply">Apply</a>
+      <a href="#community">Community</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-primary nav-cta" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply now</a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- HERO / INTRODUCTION -->
+  <section class="hero" id="about">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">TechBridge by Baselink Services Limited</p>
+        <h1>Bridging Learning to Real-World Experience</h1>
+        <p class="hero-lead">
+          TechBridge helps aspiring analysts and developers move past tutorials and courses
+          into real, practical work. We run structured learning programs and a hands-on
+          internship, built for people who are ready to apply what they know — not just study it.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply for the internship</a>
+          <a class="btn btn-ghost" href="#programs">See the programs</a>
+        </div>
+      </div>
+
+      <div class="hero-graphic" aria-hidden="true">
+        <svg viewBox="0 0 480 300" class="bridge-svg">
+          <defs>
+            <pattern id="dotGrid" width="26" height="26" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.6" class="grid-dot" />
+            </pattern>
+          </defs>
+
+          <rect x="4" y="4" width="472" height="292" rx="20" class="graphic-panel" />
+          <rect x="4" y="4" width="472" height="292" rx="20" fill="url(#dotGrid)" />
+
+          <!-- main trace -->
+          <path class="bridge-arc" d="M140 178 V110 Q140 90 160 90 H320 Q340 90 340 110 V178" />
+          <circle class="bridge-node" cx="140" cy="110" r="6" />
+          <circle class="bridge-node" cx="340" cy="110" r="6" />
+          <circle class="bridge-node" cx="240" cy="90" r="6" />
+
+          <!-- left card: Learning -->
+          <rect x="70" y="178" width="140" height="76" rx="12" class="graphic-card" />
+          <g transform="translate(123,200)" class="graphic-icon">
+            <path d="M0 4 C7 -1 15 -1 16 4 V26 C15 21 7 21 0 26 Z" />
+            <path d="M34 4 C27 -1 19 -1 18 4 V26 C19 21 27 21 34 26 Z" />
+          </g>
+          <text class="bridge-label" x="140" y="238" text-anchor="middle">Learning</text>
+
+          <!-- right card: Real work -->
+          <rect x="270" y="178" width="140" height="76" rx="12" class="graphic-card" />
+          <g transform="translate(322,198)" class="graphic-icon">
+            <path d="M8 4 L1 16 L8 28" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M28 4 L35 16 L28 28" stroke-linecap="round" stroke-linejoin="round" />
+            <line x1="21" y1="0" x2="15" y2="32" stroke-linecap="round" />
+          </g>
+          <text class="bridge-label" x="340" y="238" text-anchor="middle">Real work</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT / WHO / WHY -->
+  <section class="intro-strip">
+    <div class="wrap intro-grid">
+      <div class="intro-item">
+        <h2>What we do</h2>
+        <p>We design short, practical programs in Data Analytics and Web Development, followed by a 30-day internship where participants work on real, project-based tasks.</p>
+      </div>
+      <div class="intro-item">
+        <h2>Who it's for</h2>
+        <p>Students, recent graduates, and career changers who have some foundation and want structured, applied experience rather than another theory-only course.</p>
+      </div>
+      <div class="intro-item">
+        <h2>Why join</h2>
+        <p>You leave with practical project work behind you, closer to how real teams operate, and the possibility of a recommendation letter for strong performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="section" id="programs">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Current programs</h2>
+        <p>Two practical tracks, both focused on doing the work — not just watching it explained.</p>
+      </div>
+
+      <div class="program-grid">
+        <article class="program-card">
+          <div class="program-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M8 34 V22 M18 34 V14 M28 34 V26 M38 34 V8" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Data Analytics</h3>
+          <p>Learn to work with real datasets — cleaning, analyzing, and presenting data in a way that supports actual decisions, not just classroom exercises.</p>
+          <ul class="program-points">
+            <li>Practical, dataset-driven learning</li>
+            <li>Focus on analysis you can explain clearly</li>
+            <li>Prepares you for the TechBridge internship</li>
+          </ul>
+        </article>
+
+        <article class="program-card">
+          <div class="program-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M14 16 L6 24 L14 32 M34 16 L42 24 L34 32 M28 12 L20 36" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Web Development</h3>
+          <p>Build real interfaces and pages using modern front-end practices, moving from guided exercises to independent, project-based builds.</p>
+          <ul class="program-points">
+            <li>Hands-on, build-as-you-learn structure</li>
+            <li>Focus on shippable, working projects</li>
+            <li>Prepares you for the TechBridge internship</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERNSHIP -->
+  <section class="section internship" id="internship">
+    <div class="wrap internship-grid">
+      <div class="internship-copy">
+        <p class="eyebrow">The next step</p>
+        <h2>30-Day Practical Internship</h2>
+        <p>
+          Once you've built a foundation in Data Analytics or Web Development, the TechBridge
+          internship is where that learning turns into real, applied work. Over 30 days, you take
+          on practical, project-based assignments designed to mirror how real teams operate —
+          not simulated exercises, but work with an actual outcome.
+        </p>
+        <p>
+          Participants who perform well over the course of the internship have the possibility
+          of receiving a recommendation letter, something you can point to when applying for
+          further opportunities.
+        </p>
+      </div>
+
+      <div class="internship-facts">
+        <div class="fact-card">
+          <span class="fact-num">30</span>
+          <span class="fact-label">Days of practical, project-based work</span>
+        </div>
+        <div class="fact-card">
+          <span class="fact-num">2</span>
+          <span class="fact-label">Program tracks feeding into the internship</span>
+        </div>
+        <div class="fact-card">
+          <span class="fact-num">✓</span>
+          <span class="fact-label">Possible recommendation letter for strong performance</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLY -->
+  <section class="section apply" id="apply">
+    <div class="wrap apply-inner">
+      <h2>Ready to apply?</h2>
+      <p>The application form takes a few minutes to complete. Once submitted, the TechBridge team will review it and follow up by email.</p>
+      <a class="btn btn-primary btn-large" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">
+        Open the TechBridge Internship Application Form
+      </a>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section class="section community" id="community">
+    <div class="wrap community-inner">
+      <div class="community-copy">
+        <h2>Join the TechBridge community</h2>
+        <p>
+          Get updates on new programs, application deadlines, and internship opportunities by
+          joining the TechBridge WhatsApp community — a space to ask questions and connect with
+          others on the same path.
+        </p>
+        <a class="btn btn-whatsapp" href="https://chat.whatsapp.com/DFoiANlw4hu0BIyVHku70r" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2Zm5.6 14.3c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1-4.4-3.7-4.6-3.9-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5.2.6.7 1.9.8 2.1.1.2.1.4 0 .6-.6 1.2-1.2 1.1-.7 1.9.9 1.6 1.7 2.2 3.1 2.9.2.1.4.1.5-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.7-.1.3.1 1.7.8 2 1 .3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg>
+          Join the WhatsApp community
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer class="site-footer" id="contact">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo-light.png" alt="TechBridge logo" width="170" height="30">
+      <p>Bridging Learning to Real-World Experience.</p>
+      <p class="footer-org">A program by Baselink Services Limited.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Explore</h3>
+      <a href="#about">About</a>
+      <a href="#programs">Programs</a>
+      <a href="#internship">Internship</a>
+      <a href="#apply">Apply</a>
+      <a href="#community">Community</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <a href="mailto:techbridgebaslink@gmail.com">techbridgebaslink@gmail.com</a>
+      <a href="https://chat.whatsapp.com/DFoiANlw4hu0BIyVHku70r" target="_blank" rel="noopener">WhatsApp community</a>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>© <span id="year"></span> TechBridge · Baselink Services Limited. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
