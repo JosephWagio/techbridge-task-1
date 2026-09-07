@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programs — TechBridge</title>
+<meta name="description" content="Explore TechBridge's Data Analytics and Web Development programs — what you'll learn, the skills you'll build, and how to apply.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="TechBridge logo" width="170" height="30">
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="index.html#about">About</a>
+      <a href="programs.html" class="active">Programs</a>
+      <a href="index.html#internship">Internship</a>
+      <a href="index.html#apply">Apply</a>
+      <a href="index.html#community">Community</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+
+    <a class="btn btn-primary nav-cta" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">Apply now</a>
+
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- OVERVIEW -->
+  <section class="hero programs-hero" id="overview">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="index.html">Home</a> <span aria-hidden="true">/</span> Programs</p>
+      <p class="eyebrow">TechBridge Programs</p>
+      <h1>Practical learning, built to lead somewhere</h1>
+      <p class="hero-lead">
+        TechBridge currently runs two programs — Data Analytics and Web Development. Both are
+        designed the same way: hands-on from the start, focused on the skills that matter, and
+        structured to prepare you for the TechBridge internship that follows. Here's what each
+        one actually covers, so you can decide which path fits you.
+      </p>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATION -->
+  <section class="diff-strip">
+    <div class="wrap diff-grid">
+      <div class="diff-item">
+        <span class="diff-tag">Data Analytics</span>
+        <p>Working with data and extracting insights that support real decisions.</p>
+      </div>
+      <div class="diff-arrow" aria-hidden="true">↔</div>
+      <div class="diff-item">
+        <span class="diff-tag diff-tag-alt">Web Development</span>
+        <p>Designing and building websites and web applications people can actually use.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA ANALYTICS -->
+  <section class="section program-detail" id="data-analytics">
+    <div class="wrap program-detail-grid">
+      <div class="program-detail-copy">
+        <p class="eyebrow">Program 01</p>
+        <h2>Data Analytics</h2>
+        <p>
+          This program introduces you to practical data analysis — not abstract theory, but the
+          actual workflow of turning raw, messy data into something a business can act on. You'll
+          work through real datasets from cleaning to communication.
+        </p>
+
+        <h3 class="detail-subhead">Skills you'll build</h3>
+        <ul class="skill-tags">
+          <li class="skill-tag">Spreadsheet analysis</li>
+          <li class="skill-tag">Data cleaning</li>
+          <li class="skill-tag">SQL</li>
+          <li class="skill-tag">Data visualization</li>
+          <li class="skill-tag">Business-focused analysis</li>
+        </ul>
+
+        <h3 class="detail-subhead">What you'll be able to do</h3>
+        <ul class="program-points">
+          <li>Take a messy, real-world dataset and clean it into something usable</li>
+          <li>Query and shape data with SQL to answer specific questions</li>
+          <li>Build charts and dashboards that communicate findings clearly</li>
+          <li>Frame an analysis around a business question, not just numbers for their own sake</li>
+        </ul>
+      </div>
+
+      <div class="program-detail-visual" aria-hidden="true">
+        <svg viewBox="0 0 320 320" class="detail-svg">
+          <defs>
+            <pattern id="dotGridChart" width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.4" class="grid-dot" />
+            </pattern>
+            <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7FE05A" />
+              <stop offset="100%" stop-color="#2E9908" />
+            </linearGradient>
+          </defs>
+
+          <rect x="4" y="4" width="312" height="312" rx="18" class="graphic-panel" />
+          <rect x="4" y="4" width="312" height="312" rx="18" fill="url(#dotGridChart)" />
+
+          <g class="detail-chart">
+            <!-- gridlines -->
+            <line x1="60" y1="90" x2="270" y2="90" class="chart-grid" />
+            <line x1="60" y1="130" x2="270" y2="130" class="chart-grid" />
+            <line x1="60" y1="190" x2="270" y2="190" class="chart-grid" />
+
+            <!-- axes -->
+            <line x1="60" y1="250" x2="60" y2="90" class="chart-axis" />
+            <line x1="60" y1="250" x2="270" y2="250" class="chart-axis" />
+
+            <!-- bars -->
+            <rect x="85" y="170" width="26" height="80" rx="4" class="chart-bar" />
+            <rect x="130" y="140" width="26" height="110" rx="4" class="chart-bar" />
+            <rect x="175" y="190" width="26" height="60" rx="4" class="chart-bar" />
+            <rect x="220" y="110" width="26" height="140" rx="4" fill="url(#barGrad)" />
+
+            <!-- trend line across bar tops -->
+            <polyline points="98,170 143,140 188,190 233,110" class="chart-trend" />
+            <circle cx="98" cy="170" r="4" class="chart-marker" />
+            <circle cx="143" cy="140" r="4" class="chart-marker" />
+            <circle cx="188" cy="190" r="4" class="chart-marker" />
+            <circle cx="233" cy="110" r="5" class="chart-marker chart-marker-alt" />
+
+            <!-- insight badge -->
+            <g transform="translate(238,80)">
+              <rect x="-16" y="-16" width="32" height="32" rx="10" class="chart-badge-bg" />
+              <path d="M-6 2 L0 -6 L6 2 M0 -6 V8" class="chart-badge-icon" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEB DEVELOPMENT -->
+  <section class="section program-detail program-detail-reverse" id="web-development">
+    <div class="wrap program-detail-grid">
+      <div class="program-detail-visual" aria-hidden="true">
+        <svg viewBox="0 0 320 320" class="detail-svg">
+          <defs>
+            <pattern id="dotGridCode" width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="2" cy="2" r="1.4" class="grid-dot" />
+            </pattern>
+          </defs>
+
+          <rect x="4" y="4" width="312" height="312" rx="18" class="graphic-panel" />
+          <rect x="4" y="4" width="312" height="312" rx="18" fill="url(#dotGridCode)" />
+
+          <g class="detail-code">
+            <rect x="45" y="65" width="230" height="190" rx="12" class="editor-window" />
+            <line x1="45" y1="99" x2="275" y2="99" class="editor-divider" />
+
+            <circle cx="65" cy="82" r="4" class="editor-dot-red" />
+            <circle cx="79" cy="82" r="4" class="editor-dot-amber" />
+            <circle cx="93" cy="82" r="4" class="editor-dot-green" />
+            <rect x="150" y="77" width="60" height="10" rx="5" class="editor-tab" />
+
+            <line x1="80" y1="115" x2="80" y2="235" class="indent-guide" />
+
+            <path d="M65 122 L75 132 L65 142" class="chart-axis" stroke-linecap="round" stroke-linejoin="round" />
+            <rect x="90" y="128" width="46" height="8" rx="4" class="code-line-b" />
+
+            <rect x="92" y="152" width="150" height="8" rx="4" class="code-line-a" />
+            <rect x="92" y="174" width="110" height="8" rx="4" class="code-line-b" />
+            <rect x="92" y="196" width="130" height="8" rx="4" class="code-line-a" />
+            <rect x="92" y="218" width="70" height="8" rx="4" class="code-line-c" />
+            <rect x="168" y="218" width="6" height="10" class="code-cursor" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="program-detail-copy">
+        <p class="eyebrow">Program 02</p>
+        <h2>Web Development</h2>
+        <p>
+          This program introduces you to practical website development — building real pages and
+          interfaces from the ground up, then managing that work the way development teams
+          actually do.
+        </p>
+
+        <h3 class="detail-subhead">Skills you'll build</h3>
+        <ul class="skill-tags">
+          <li class="skill-tag skill-tag-alt">HTML</li>
+          <li class="skill-tag skill-tag-alt">CSS</li>
+          <li class="skill-tag skill-tag-alt">JavaScript</li>
+          <li class="skill-tag skill-tag-alt">Git/GitHub</li>
+          <li class="skill-tag skill-tag-alt">Building web projects</li>
+        </ul>
+
+        <h3 class="detail-subhead">What you'll be able to do</h3>
+        <ul class="program-points">
+          <li>Structure a web page properly with semantic HTML</li>
+          <li>Style and lay out interfaces with CSS, including responsive layouts</li>
+          <li>Add interactivity and logic with JavaScript</li>
+          <li>Track your work and collaborate using Git and GitHub</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section apply" id="apply-cta">
+    <div class="wrap apply-inner">
+      <h2>Ready to put this into practice?</h2>
+      <p>
+        Both programs feed into the TechBridge 30-day internship — the next step once you've
+        built your foundation. Apply below, or head back to the homepage to learn more first.
+      </p>
+      <div class="hero-actions apply-actions">
+        <a class="btn btn-primary btn-large" href="https://forms.gle/8EbdSy5ttGfLZfjv5" target="_blank" rel="noopener">
+          Apply for TechBridge Internship
+        </a>
+        <a class="btn btn-ghost btn-ghost-dark" href="index.html">Back to homepage</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer class="site-footer" id="contact">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="images/logo-light.png" alt="TechBridge logo" width="170" height="30">
+      <p>Bridging Learning to Real-World Experience.</p>
+      <p class="footer-org">A program by Baselink Services Limited.</p>
+    </div>
+
+    <div class="footer-col">
+      <h3>Explore</h3>
+      <a href="index.html#about">About</a>
+      <a href="programs.html">Programs</a>
+      <a href="index.html#internship">Internship</a>
+      <a href="index.html#apply">Apply</a>
+      <a href="index.html#community">Community</a>
+    </div>
+
+    <div class="footer-col">
+      <h3>Contact</h3>
+      <a href="mailto:techbridgebaslink@gmail.com">techbridgebaslink@gmail.com</a>
+      <a href="https://chat.whatsapp.com/DFoiANlw4hu0BIyVHku70r" target="_blank" rel="noopener">WhatsApp community</a>
+    </div>
+  </div>
+
+  <div class="wrap footer-bottom">
+    <p>© <span id="year"></span> TechBridge · Baselink Services Limited. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

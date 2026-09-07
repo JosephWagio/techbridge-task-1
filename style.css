@@ -143,6 +143,7 @@ a{ color: var(--blue-dark); }
   border-bottom: 2px solid transparent;
 }
 .main-nav a:hover{ border-bottom-color: var(--blue); color: var(--navy); }
+.main-nav a.active{ color: var(--navy); border-bottom-color: var(--blue); font-weight: 600; }
 
 .nav-cta{ white-space: nowrap; }
 
@@ -360,6 +361,133 @@ a{ color: var(--blue-dark); }
   color: #7B84A0;
 }
 
+/* ---------- Programs page components ---------- */
+.breadcrumb{
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2em;
+}
+.breadcrumb a{ color: var(--text-muted); text-decoration: none; }
+.breadcrumb a:hover{ color: var(--blue-dark); }
+
+.programs-hero .hero-lead{ max-width: 62ch; }
+
+.programs-more{
+  margin-top: 36px;
+  text-align: center;
+}
+
+.btn-ghost-dark{
+  color: #fff;
+  border-color: rgba(255,255,255,0.35);
+}
+.btn-ghost-dark:hover{ border-color: #fff; color: #fff; background: rgba(255,255,255,0.08); }
+
+.apply-actions{ justify-content: center; }
+
+/* Differentiation strip */
+.diff-strip{
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 36px 0;
+}
+.diff-grid{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+}
+.diff-item{ text-align: center; }
+.diff-item p{ margin: 10px 0 0; color: var(--text-muted); }
+.diff-tag{
+  display: inline-block;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--navy);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 20px;
+}
+.diff-tag-alt{ border-color: var(--blue); color: var(--blue-dark); }
+.diff-arrow{
+  font-size: 1.4rem;
+  color: var(--line);
+  font-weight: 700;
+}
+
+/* Program detail sections */
+.program-detail-grid{
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+.program-detail-reverse .program-detail-grid{
+  grid-template-columns: 0.9fr 1.1fr;
+}
+.program-detail-reverse .program-detail-copy{ order: 2; }
+.program-detail-reverse .program-detail-visual{ order: 1; }
+
+.detail-subhead{
+  font-size: 1rem;
+  margin-top: 1.4em;
+}
+
+.skill-tags{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0.6em 0 0;
+  padding: 0;
+}
+.skill-tag{
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--navy);
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 999px;
+}
+.skill-tag-alt{
+  background: rgba(57,184,10,0.08);
+  border-color: rgba(57,184,10,0.35);
+  color: var(--blue-dark);
+}
+
+.detail-svg{ width: 100%; height: auto; filter: drop-shadow(0 16px 32px rgba(13,0,77,0.08)); }
+
+.chart-axis{ stroke: var(--line); stroke-width: 3; fill: none; }
+.chart-grid{ stroke: var(--line); stroke-width: 1; opacity: 0.6; }
+.chart-bar{ fill: #DCE2EC; }
+.chart-trend{
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0.5;
+}
+.chart-marker{ fill: #fff; stroke: var(--navy); stroke-width: 2; }
+.chart-marker-alt{ fill: var(--blue); stroke: var(--navy); }
+.chart-badge-bg{ fill: var(--navy); }
+.chart-badge-icon{ fill: none; stroke: #A6EE8A; stroke-width: 2; }
+
+.editor-window{ fill: var(--panel); stroke: var(--line); stroke-width: 1.5; }
+.editor-divider{ stroke: var(--line); stroke-width: 1.5; }
+.editor-dot-red{ fill: #E8877A; }
+.editor-dot-amber{ fill: #F0C36D; }
+.editor-dot-green{ fill: var(--blue); }
+.editor-tab{ fill: var(--bg); }
+.indent-guide{ stroke: var(--line); stroke-width: 1.5; }
+.code-line-a{ fill: var(--blue); opacity: 0.55; }
+.code-line-b{ fill: var(--navy); opacity: 0.28; }
+.code-line-c{ fill: var(--line); }
+.code-cursor{ fill: var(--navy); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 900px){
   .hero-inner{ grid-template-columns: 1fr; }
@@ -368,6 +496,13 @@ a{ color: var(--blue-dark); }
   .program-grid{ grid-template-columns: 1fr; }
   .internship-grid{ grid-template-columns: 1fr; }
   .footer-grid{ grid-template-columns: 1fr 1fr; }
+  .diff-grid{ grid-template-columns: 1fr; }
+  .diff-arrow{ transform: rotate(90deg); }
+  .program-detail-grid,
+  .program-detail-reverse .program-detail-grid{ grid-template-columns: 1fr; }
+  .program-detail-reverse .program-detail-copy{ order: 1; }
+  .program-detail-reverse .program-detail-visual{ order: 2; }
+  .program-detail-visual{ max-width: 320px; margin: 0 auto; }
 }
 
 @media (max-width: 720px){
