@@ -108,8 +108,8 @@ Techbridge/
 ├── package.json
 ├── api/
 │   ├── health.js
+│   ├── tasks.js
 │   └── tasks/
-│       ├── index.js
 │       └── [id].js
 ├── backend/
 │   ├── task-store.js
