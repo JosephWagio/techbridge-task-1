@@ -51,12 +51,15 @@
     <div class="wrap">
       <div class="dashboard-overview-head">
         <div><p class="eyebrow">Your progress</p><h2 id="progress-heading">Internship progress</h2></div>
-        <div class="dashboard-track-picker">
+        <div class="dashboard-overview-actions">
+          <p class="api-status is-loading" id="api-status" role="status"><span class="api-status-dot" aria-hidden="true"></span><span id="api-status-label">Connecting to backend</span></p>
+          <div class="dashboard-track-picker">
           <label for="dashboard-track">Track</label>
           <select id="dashboard-track">
             <option value="web-development">Web Development</option>
             <option value="data-analytics">Data Analytics</option>
           </select>
+          </div>
         </div>
       </div>
       <div class="progress-panel">
@@ -81,7 +84,7 @@
     <div class="wrap">
       <div class="section-head dashboard-section-head">
         <p class="eyebrow">Your learning path</p><h2 id="task-tracker-heading">Internship task tracker</h2>
-        <p>Check your task status, mark work complete, or open a task for more context. Your progress is saved on this device.</p>
+        <p>Tasks load from the TechBridge API. Update a status or open a task for more context.</p>
       </div>
       <div class="dashboard-task-toolbar">
         <div class="dashboard-filter-group" role="group" aria-label="Filter tasks by status">
@@ -90,10 +93,14 @@
           <button type="button" class="dashboard-filter" data-status-filter="in-progress" aria-pressed="false">In progress <span id="filter-count-in-progress">0</span></button>
           <button type="button" class="dashboard-filter" data-status-filter="not-started" aria-pressed="false">Not started <span id="filter-count-not-started">8</span></button>
         </div>
-        <button class="dashboard-reset" id="reset-progress" type="button">Reset demo progress</button>
+      </div>
+      <p class="dashboard-feedback is-loading" id="dashboard-loading" role="status">Loading tasks from the TechBridge API…</p>
+      <div class="dashboard-error" id="dashboard-error" role="alert" hidden>
+        <div><strong id="dashboard-error-title">Unable to load tasks.</strong><p id="dashboard-error-message">Check that the TechBridge backend is running, then try again.</p></div>
+        <button class="btn btn-ghost" id="retry-task-load" type="button">Try again</button>
       </div>
       <div class="dashboard-task-list" id="dashboard-task-list" aria-live="polite"></div>
-      <p class="dashboard-empty" id="dashboard-empty" hidden>No tasks have this status yet. Choose another filter to see your task list.</p>
+      <p class="dashboard-empty" id="dashboard-empty" hidden>No tasks have this status. Choose another filter to see your task list.</p>
     </div>
   </section>
 
@@ -146,6 +153,6 @@
 </footer>
 
 <script src="script.js?v=6"></script>
-<script src="dashboard.js?v=1"></script>
+<script src="dashboard.js?v=3"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 TechBridge by Baselink Services Limited — **Bridging Learning to Real-World Experience**.
 
-This is a responsive multi-page website for TechBridge's learning programs and practical internship. It is built with HTML5 and CSS3, with vanilla JavaScript for the mobile navigation, current year, interactive internship roadmap, Challenge Hub, and intern dashboard.
+This is a responsive multi-page website for TechBridge's learning programs and practical internship. It uses HTML5, CSS3, vanilla JavaScript, and a local Node.js/Express API for the intern dashboard.
 
 ## Pages
 
@@ -10,7 +10,7 @@ This is a responsive multi-page website for TechBridge's learning programs and p
 - `programs.html` — Data Analytics and Web Development program details and skills.
 - `internship-tasks.html` — an interactive 30-day roadmap where visitors can switch between Data Analytics and Web Development and explore eight tasks for each track.
 - `challenges.html` — an interactive Challenge Hub with track and difficulty filters and an in-page detail dialog.
-- `dashboard.html` — a sample intern dashboard with a two-track task tracker, progress summary, task details, Challenge Hub preview, and interactive technology explorer.
+- `dashboard.html` — a two-track intern dashboard that loads tasks and statuses from the API, with progress, filters, task details, Challenge Hub preview, and technology explorer.
 
 ## Web Development track
 
@@ -51,9 +51,34 @@ Visitors can filter by track and difficulty at the same time, reset both filters
 
 ## Intern Dashboard
 
-The dashboard lets a sample intern switch between Data Analytics and Web Development, view all eight track tasks, filter by task status, open task details, and mark tasks complete. Counts and the progress bar update without reloading. Per-track progress is saved in browser local storage on that device; use **Reset demo progress** to restore the sample state (two completed tasks, one in progress, and five not started). This is a frontend demo and does not use accounts or a server.
+The dashboard switches between Data Analytics and Web Development and loads each track's eight tasks from the local API. It filters API data by status, requests task details when **View task** is selected, and sends status changes to the server. Counts and progress update from the returned task data. The sample intern name is Alex. Task statuses are saved to `backend/data/tasks.json`; this demo has no accounts or database.
 
 The technology explorer introduces Next.js, Vue.js, Angular, and backend development. Its Backend view includes Node.js, Express.js, and Django, with links to their documentation.
+
+## Task Management API
+
+The Express API runs at `http://127.0.0.1:3000`. Task IDs (1–8) are track-specific; the `track` query parameter selects a track and defaults to `web-development`.
+
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| GET | `/api/health` | Check that the backend is running. |
+| GET | `/api/tasks` | Get tasks for both tracks. |
+| GET | `/api/tasks?track=web-development` | Get the eight tasks for one track (`data-analytics` is also supported). |
+| GET | `/api/tasks/:id?track=web-development` | Get one task; `track` is optional and defaults to Web Development. |
+| PUT | `/api/tasks/:id?track=web-development` | Update a task status with a JSON body such as `{"status":"completed"}`. Valid statuses are `completed`, `in-progress`, and `not-started`. |
+
+The dashboard uses `fetch()` to call these routes. The Express server also serves the website from the same origin, so local API requests do not need cross-origin configuration.
+
+## Run locally
+
+From the `backend` directory, install dependencies and start the server:
+
+```sh
+npm install
+npm start
+```
+
+Then open [http://127.0.0.1:3000/dashboard.html](http://127.0.0.1:3000/dashboard.html). The server serves the other site pages too. Use `npm run dev` to restart the server automatically while editing backend files.
 
 ## Project structure
 
@@ -70,12 +95,15 @@ Techbridge/
 ├── style.css
 ├── script.js
 ├── dashboard.js
+├── .gitignore
+├── backend/
+│   ├── data/
+│   │   └── tasks.json
+│   ├── package.json
+│   ├── package-lock.json
+│   └── server.js
 └── README.md
 ```
-
-## Run locally
-
-Open `index.html` in a browser. The pages link to each other using relative paths and do not require a build step or server.
 
 ## Project history
 
@@ -84,4 +112,5 @@ Open `index.html` in a browser. The pages link to each other using relative path
 - **Task 3:** Added an internship roadmap that presents the Web Development tasks in order and connects with the existing pages.
 - **Task 4:** Added the interactive two-track roadmap. Visitors can switch between the eight Data Analytics tasks and the eight Web Development tasks without a page refresh.
 - **Task 5:** Added the Challenge Hub with six track-specific challenges, combined track and difficulty filtering, reset controls, and an accessible detail dialog.
-- **Task 6:** Added the Intern Dashboard with task status tracking, progress calculations, status filters, task details, browser-local progress saving, a Challenge Hub link, and an interactive modern technology explorer.
+- **Task 6:** Added the Intern Dashboard with task status tracking, progress calculations, status filters, task details, a Challenge Hub link, and an interactive modern technology explorer.
+- **Task 7:** Added a Node.js/Express task API, JSON task data for both tracks, dashboard API loading/error/connection states, task detail GET requests, and persisted task-status updates.

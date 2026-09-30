@@ -1,13 +1,17 @@
 const dashboard = document.getElementById('dashboard-task-list');
 
-if (dashboard && typeof internshipTracks !== 'undefined') {
-  const TRACK_STORAGE_KEY = 'techbridge-dashboard-progress-v1';
+if (dashboard) {
+  const API_BASE = '/api';
   const trackPicker = document.getElementById('dashboard-track');
-  const totalTasks = 8;
+  const dashboardLoading = document.getElementById('dashboard-loading');
+  const dashboardError = document.getElementById('dashboard-error');
+  const dashboardEmpty = document.getElementById('dashboard-empty');
+  const taskDialog = document.getElementById('dashboard-task-dialog');
   let selectedTrack = trackPicker.value;
   let activeStatusFilter = 'all';
+  let currentTasks = [];
+  let loadSequence = 0;
 
-  const taskStatuses = loadStatuses();
   const technologyContent = {
     nextjs: {
       index: '01', category: 'React framework', title: 'Next.js',
@@ -31,37 +35,6 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
     }
   };
 
-  function loadStatuses() {
-    const initial = {};
-    Object.keys(internshipTracks).forEach(trackKey => {
-      initial[trackKey] = internshipTracks[trackKey].tasks.map((task, index) =>
-        index < 2 ? 'completed' : index === 2 ? 'in-progress' : 'not-started'
-      );
-    });
-
-    try {
-      const saved = JSON.parse(localStorage.getItem(TRACK_STORAGE_KEY));
-      Object.keys(initial).forEach(trackKey => {
-        if (!Array.isArray(saved?.[trackKey])) return;
-        initial[trackKey] = initial[trackKey].map((fallback, index) => {
-          const status = saved[trackKey][index];
-          return ['completed', 'in-progress', 'not-started'].includes(status) ? status : fallback;
-        });
-      });
-    } catch (error) {
-      // Keep the sample progress in memory if storage is unavailable or malformed.
-    }
-    return initial;
-  }
-
-  function saveStatuses() {
-    try {
-      localStorage.setItem(TRACK_STORAGE_KEY, JSON.stringify(taskStatuses));
-    } catch (error) {
-      // The dashboard remains interactive when browser storage is disabled.
-    }
-  }
-
   function makeElement(tagName, className, text) {
     const element = document.createElement(tagName);
     if (className) element.className = className;
@@ -69,44 +42,64 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
     return element;
   }
 
+  async function requestJson(endpoint, options = {}) {
+    const response = await fetch(`${API_BASE}${endpoint}`, options);
+    let result;
+    try {
+      result = await response.json();
+    } catch (error) {
+      throw new Error('The backend returned an unreadable response.');
+    }
+    if (!response.ok) throw new Error(result.error || `Request failed (${response.status}).`);
+    return result;
+  }
+
+  function updateApiStatus(status, message) {
+    const indicator = document.getElementById('api-status');
+    indicator.classList.remove('is-loading', 'is-connected', 'is-offline');
+    indicator.classList.add(`is-${status}`);
+    document.getElementById('api-status-label').textContent = message;
+  }
+
   function statusLabel(status) {
     return status === 'in-progress' ? 'In progress' : status === 'not-started' ? 'Not started' : 'Completed';
   }
 
   function updateProgress() {
-    const track = internshipTracks[selectedTrack];
-    const statuses = taskStatuses[selectedTrack];
-    const completed = statuses.filter(status => status === 'completed').length;
-    const inProgress = statuses.filter(status => status === 'in-progress').length;
-    const notStarted = totalTasks - completed - inProgress;
-    const remaining = totalTasks - completed;
-    const percent = Math.round((completed / totalTasks) * 100);
-    const currentTask = statuses.findIndex(status => status !== 'completed');
+    const completed = currentTasks.filter(task => task.status === 'completed').length;
+    const inProgress = currentTasks.filter(task => task.status === 'in-progress').length;
+    const notStarted = currentTasks.filter(task => task.status === 'not-started').length;
+    const total = 8;
+    const remaining = total - completed;
+    const percent = (completed / total) * 100;
+    const percentLabel = Number.isInteger(percent) ? `${percent}%` : `${percent.toFixed(1)}%`;
+    const currentTask = currentTasks.find(task => task.status !== 'completed');
+    const trackName = currentTasks[0]?.trackName || (selectedTrack === 'data-analytics' ? 'Data Analytics' : 'Web Development');
 
-    document.getElementById('intern-track-name').textContent = `${track.name} Intern`;
+    document.getElementById('intern-track-name').textContent = `${trackName} Intern`;
     document.getElementById('completed-count').textContent = String(completed);
-    document.getElementById('progress-percent').textContent = `${percent}%`;
+    document.getElementById('progress-percent').textContent = percentLabel;
     document.getElementById('progress-fill').style.width = `${percent}%`;
     document.getElementById('progress-track').setAttribute('aria-valuenow', String(completed));
     document.getElementById('remaining-count').textContent = `${remaining} ${remaining === 1 ? 'task' : 'tasks'} remaining`;
-    document.getElementById('active-task-label').textContent = currentTask < 0 ? 'All tasks completed' : `Next up: Task ${currentTask + 1}`;
+    document.getElementById('active-task-label').textContent = currentTasks.length === 0
+      ? 'Tasks appear when the backend connects'
+      : currentTask ? `Next up: Task ${currentTask.number}` : 'All tasks completed';
     document.getElementById('stat-completed').textContent = String(completed);
     document.getElementById('stat-progress').textContent = String(inProgress);
     document.getElementById('stat-upcoming').textContent = String(notStarted);
-    document.getElementById('filter-count-all').textContent = String(totalTasks);
+    document.getElementById('filter-count-all').textContent = String(currentTasks.length);
     document.getElementById('filter-count-completed').textContent = String(completed);
     document.getElementById('filter-count-in-progress').textContent = String(inProgress);
     document.getElementById('filter-count-not-started').textContent = String(notStarted);
   }
 
   function renderTasks() {
-    const track = internshipTracks[selectedTrack];
-    const statuses = taskStatuses[selectedTrack];
-    const matchingTasks = track.tasks.filter((task, index) => activeStatusFilter === 'all' || statuses[index] === activeStatusFilter);
-
+    const matchingTasks = currentTasks.filter(task => activeStatusFilter === 'all' || task.status === activeStatusFilter);
     dashboard.replaceChildren();
+
     matchingTasks.forEach(task => {
-      const status = statuses[task.number - 1];
+      const status = task.status;
       const card = makeElement('article', `dashboard-task-card status-${status}`);
       const number = makeElement('span', 'dashboard-task-number', String(task.number).padStart(2, '0'));
       number.setAttribute('aria-hidden', 'true');
@@ -116,28 +109,32 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
       const heading = makeElement('div', 'dashboard-task-title-wrap');
       heading.append(makeElement('p', 'task-kicker', `Task ${task.number} · Day ${task.day}`));
       heading.append(makeElement('h3', '', task.title));
-      const badge = makeElement('span', `dashboard-status-badge status-badge-${status}`);
-      badge.append(makeElement('span', 'status-dot', ''));
-      badge.lastChild.setAttribute('aria-hidden', 'true');
-      badge.append(document.createTextNode(statusLabel(status)));
-      headingRow.append(heading, badge);
 
+      const badge = makeElement('span', `dashboard-status-badge status-badge-${status}`);
+      const dot = makeElement('span', 'status-dot', '');
+      dot.setAttribute('aria-hidden', 'true');
+      badge.append(dot, document.createTextNode(statusLabel(status)));
+      headingRow.append(heading, badge);
       content.append(headingRow, makeElement('p', 'dashboard-task-description', task.description));
+
       const actions = makeElement('div', 'dashboard-task-actions');
       const detailsButton = makeElement('button', 'btn btn-ghost dashboard-view-task', 'View task');
       detailsButton.type = 'button';
-      detailsButton.dataset.taskNumber = String(task.number);
+      detailsButton.dataset.taskId = String(task.id);
       detailsButton.setAttribute('aria-haspopup', 'dialog');
-      const statusButton = makeElement('button', status === 'completed' ? 'dashboard-complete-button is-done' : 'dashboard-complete-button', status === 'completed' ? 'Undo completion' : 'Mark as completed');
+
+      const isComplete = status === 'completed';
+      const statusButton = makeElement('button', isComplete ? 'dashboard-complete-button is-done' : 'dashboard-complete-button', isComplete ? 'Undo completion' : 'Mark as completed');
       statusButton.type = 'button';
-      statusButton.dataset.completeTask = String(task.number);
+      statusButton.dataset.updateTaskId = String(task.id);
+      statusButton.disabled = Boolean(task.saving);
       actions.append(detailsButton, statusButton);
       content.append(actions);
       card.append(number, content);
       dashboard.append(card);
     });
 
-    document.getElementById('dashboard-empty').hidden = matchingTasks.length > 0;
+    dashboardEmpty.hidden = currentTasks.length === 0 || matchingTasks.length > 0;
     updateProgress();
   }
 
@@ -149,36 +146,108 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
     });
   }
 
-  function showTaskDetails(task) {
-    const dialog = document.getElementById('dashboard-task-dialog');
-    document.getElementById('task-dialog-track').textContent = internshipTracks[selectedTrack].name;
-    document.getElementById('task-dialog-number').textContent = `Task ${task.number} · Day ${task.day}`;
-    document.getElementById('task-dialog-title').textContent = task.title;
-    document.getElementById('task-dialog-description').textContent = task.description;
-    const meta = document.getElementById('task-dialog-meta');
-    meta.replaceChildren(
-      makeElement('span', `challenge-track-tag ${selectedTrack}`, internshipTracks[selectedTrack].name),
-      makeElement('span', 'difficulty-tag', task.difficulty),
-      makeElement('span', 'difficulty-tag', statusLabel(taskStatuses[selectedTrack][task.number - 1]))
-    );
-    dialog.showModal();
+  function showApiError(message, title = 'Unable to load tasks.') {
+    document.getElementById('dashboard-error-title').textContent = title;
+    document.getElementById('dashboard-error-message').textContent = message;
+    dashboardError.hidden = false;
+    updateApiStatus('offline', 'Backend status: Offline');
+  }
+
+  async function loadTasks() {
+    const sequence = ++loadSequence;
+    const requestedTrack = selectedTrack;
+    currentTasks = [];
+    dashboard.replaceChildren();
+    dashboardEmpty.hidden = true;
+    dashboardError.hidden = true;
+    dashboardLoading.hidden = false;
+    updateApiStatus('loading', 'Backend status: Connecting');
+    updateProgress();
+
+    try {
+      const result = await requestJson(`/tasks?track=${encodeURIComponent(requestedTrack)}`);
+      if (sequence !== loadSequence) return;
+      if (!Array.isArray(result.tasks)) throw new Error('The backend response did not include a task list.');
+      currentTasks = result.tasks;
+      dashboardLoading.hidden = true;
+      updateApiStatus('connected', 'Backend status: Connected');
+      renderTasks();
+    } catch (error) {
+      if (sequence !== loadSequence) return;
+      dashboardLoading.hidden = true;
+      showApiError(`${error.message} Check that the backend is running, then try again.`);
+      renderTasks();
+    }
+  }
+
+  async function showTaskDetails(taskId) {
+    const taskTitle = document.getElementById('task-dialog-title');
+    const taskDescription = document.getElementById('task-dialog-description');
+    const taskMeta = document.getElementById('task-dialog-meta');
+    document.getElementById('task-dialog-track').textContent = selectedTrack === 'data-analytics' ? 'Data Analytics' : 'Web Development';
+    document.getElementById('task-dialog-number').textContent = 'Loading task details…';
+    taskTitle.textContent = 'Loading task…';
+    taskDescription.textContent = 'Requesting this task from the TechBridge API.';
+    taskMeta.replaceChildren();
+    taskDialog.showModal();
+
+    try {
+      const result = await requestJson(`/tasks/${encodeURIComponent(taskId)}?track=${encodeURIComponent(selectedTrack)}`);
+      const task = result.task;
+      if (!task) throw new Error('The backend did not return this task.');
+      document.getElementById('task-dialog-number').textContent = `Task ${task.number} · Day ${task.day}`;
+      taskTitle.textContent = task.title;
+      taskDescription.textContent = task.description;
+      taskMeta.replaceChildren(
+        makeElement('span', `challenge-track-tag ${task.track}`, task.trackName),
+        makeElement('span', 'difficulty-tag', task.difficulty),
+        makeElement('span', 'difficulty-tag', statusLabel(task.status))
+      );
+      updateApiStatus('connected', 'Backend status: Connected');
+    } catch (error) {
+      document.getElementById('task-dialog-number').textContent = 'Task details';
+      taskTitle.textContent = 'Task details unavailable';
+      taskDescription.textContent = `${error.message} Check that the backend is running and try again.`;
+      showApiError('The task details could not be retrieved. Check the backend connection and try again.', 'Unable to load task details.');
+    }
+  }
+
+  async function updateTaskStatus(task, button) {
+    const requestedTrack = selectedTrack;
+    const nextStatus = task.status === 'completed' ? 'not-started' : 'completed';
+    button.disabled = true;
+    button.textContent = 'Saving…';
+
+    try {
+      const result = await requestJson(`/tasks/${encodeURIComponent(task.id)}?track=${encodeURIComponent(requestedTrack)}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: nextStatus })
+      });
+      if (!result.task) throw new Error('The backend did not confirm the task update.');
+      if (requestedTrack === selectedTrack) {
+        currentTasks = currentTasks.map(item => item.id === result.task.id ? result.task : item);
+      }
+      dashboardError.hidden = true;
+      updateApiStatus('connected', 'Backend status: Connected');
+      renderTasks();
+    } catch (error) {
+      button.disabled = false;
+      button.textContent = task.status === 'completed' ? 'Undo completion' : 'Mark as completed';
+      showApiError(`${error.message} Your task status was not changed.`, 'Unable to update task.');
+    }
   }
 
   dashboard.addEventListener('click', event => {
-    const completeButton = event.target.closest('[data-complete-task]');
-    if (completeButton) {
-      const taskIndex = Number(completeButton.dataset.completeTask) - 1;
-      taskStatuses[selectedTrack][taskIndex] = taskStatuses[selectedTrack][taskIndex] === 'completed' ? 'not-started' : 'completed';
-      saveStatuses();
-      renderTasks();
+    const statusButton = event.target.closest('[data-update-task-id]');
+    if (statusButton) {
+      const task = currentTasks.find(item => String(item.id) === statusButton.dataset.updateTaskId);
+      if (task) updateTaskStatus(task, statusButton);
       return;
     }
 
-    const viewButton = event.target.closest('[data-task-number]');
-    if (viewButton) {
-      const task = internshipTracks[selectedTrack].tasks.find(item => item.number === Number(viewButton.dataset.taskNumber));
-      showTaskDetails(task);
-    }
+    const detailsButton = event.target.closest('[data-task-id]');
+    if (detailsButton) showTaskDetails(detailsButton.dataset.taskId);
   });
 
   document.querySelectorAll('[data-status-filter]').forEach(button => {
@@ -193,22 +262,10 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
     selectedTrack = trackPicker.value;
     activeStatusFilter = 'all';
     updateFilterButtons('all');
-    renderTasks();
+    loadTasks();
   });
 
-  document.getElementById('reset-progress').addEventListener('click', () => {
-    Object.keys(internshipTracks).forEach(trackKey => {
-      taskStatuses[trackKey] = internshipTracks[trackKey].tasks.map((task, index) =>
-        index < 2 ? 'completed' : index === 2 ? 'in-progress' : 'not-started'
-      );
-    });
-    activeStatusFilter = 'all';
-    updateFilterButtons('all');
-    saveStatuses();
-    renderTasks();
-  });
-
-  const taskDialog = document.getElementById('dashboard-task-dialog');
+  document.getElementById('retry-task-load').addEventListener('click', loadTasks);
   document.getElementById('task-dialog-close').addEventListener('click', () => taskDialog.close());
   taskDialog.addEventListener('click', event => {
     if (event.target === taskDialog) taskDialog.close();
@@ -229,8 +286,9 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
     document.getElementById('technology-category').textContent = item.category;
     document.getElementById('technology-title').textContent = item.title;
     document.getElementById('technology-description').textContent = item.description;
-    document.getElementById('technology-link').href = item.link;
-    document.getElementById('technology-link').textContent = `${item.linkLabel} ↗`;
+    const technologyLink = document.getElementById('technology-link');
+    technologyLink.href = item.link;
+    technologyLink.textContent = `${item.linkLabel} ↗`;
 
     const extra = document.getElementById('technology-extra');
     extra.replaceChildren();
@@ -254,5 +312,5 @@ if (dashboard && typeof internshipTracks !== 'undefined') {
     }
   });
 
-  renderTasks();
+  loadTasks();
 }

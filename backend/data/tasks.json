@@ -1,0 +1,178 @@
+[
+  {
+    "id": 1,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 1,
+    "day": 1,
+    "title": "Build the TechBridge Homepage",
+    "description": "Create the first version of the TechBridge website using HTML and CSS.",
+    "difficulty": "Beginner",
+    "status": "completed"
+  },
+  {
+    "id": 2,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 2,
+    "day": 4,
+    "title": "Build the TechBridge Programs Experience",
+    "description": "Create a Programs experience presenting TechBridge's available learning programs.",
+    "difficulty": "Beginner",
+    "status": "completed"
+  },
+  {
+    "id": 3,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 3,
+    "day": 8,
+    "title": "Build the Internship Tasks Experience",
+    "description": "Create an interface that presents the TechBridge internship tasks and helps users understand the internship journey.",
+    "difficulty": "Beginner → Intermediate",
+    "status": "in-progress"
+  },
+  {
+    "id": 4,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 4,
+    "day": 11,
+    "title": "Build an Interactive Internship Roadmap",
+    "description": "Use JavaScript to allow visitors to switch between the Data Analytics and Web Development internship tracks.",
+    "difficulty": "Beginner → Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 5,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 5,
+    "day": 15,
+    "title": "Build the Intern Registration Experience",
+    "description": "Create a professional registration and onboarding interface for TechBridge interns.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 6,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 6,
+    "day": 19,
+    "title": "Build the Task Submission System",
+    "description": "Create an interface through which interns can prepare and submit their task work.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 7,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 7,
+    "day": 22,
+    "title": "Build the Intern Dashboard",
+    "description": "Create a dashboard where an intern can view their profile, progress, tasks and submissions.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 8,
+    "track": "web-development",
+    "trackName": "Web Development",
+    "number": 8,
+    "day": 26,
+    "title": "Build the Complete TechBridge Internship Platform",
+    "description": "Combine the different components created during the internship into a complete TechBridge platform.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 1,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 1,
+    "day": 1,
+    "title": "Data Cleaning Basics",
+    "description": "Clean a messy dataset using Google Sheets or Excel. Identify and fix duplicate rows, blank cells, inconsistent formatting, and incorrect data types.",
+    "difficulty": "Beginner",
+    "status": "completed"
+  },
+  {
+    "id": 2,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 2,
+    "day": 4,
+    "title": "Formulas & Pivot Tables",
+    "description": "Use spreadsheet formulas and Pivot Tables to answer questions and extract useful insights from a dataset.",
+    "difficulty": "Beginner",
+    "status": "completed"
+  },
+  {
+    "id": 3,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 3,
+    "day": 8,
+    "title": "Data Visualization",
+    "description": "Create charts and a simple dashboard that communicate useful insights from a dataset.",
+    "difficulty": "Beginner → Intermediate",
+    "status": "in-progress"
+  },
+  {
+    "id": 4,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 4,
+    "day": 11,
+    "title": "Introduction to SQL",
+    "description": "Practice basic SQL queries and use them to answer real-world questions about data.",
+    "difficulty": "Beginner → Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 5,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 5,
+    "day": 15,
+    "title": "SQL Joins & Aggregations",
+    "description": "Use JOIN, GROUP BY and aggregate functions such as COUNT, SUM and AVG to analyze information across multiple tables.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 6,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 6,
+    "day": 19,
+    "title": "Lookup Functions & Data Wrangling",
+    "description": "Use VLOOKUP or XLOOKUP to combine related datasets and handle data mismatches.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 7,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 7,
+    "day": 22,
+    "title": "Mini Analysis Project",
+    "description": "Complete a small end-to-end analysis involving data cleaning, formulas, Pivot Tables, charts and recommendations.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  },
+  {
+    "id": 8,
+    "track": "data-analytics",
+    "trackName": "Data Analytics",
+    "number": 8,
+    "day": 26,
+    "title": "Capstone Project",
+    "description": "Complete a larger project combining spreadsheet analysis and SQL using at least two related tables.",
+    "difficulty": "Intermediate",
+    "status": "not-started"
+  }
+]
