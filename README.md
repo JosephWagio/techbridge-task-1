@@ -2,7 +2,7 @@
 
 TechBridge by Baselink Services Limited — **Bridging Learning to Real-World Experience**.
 
-This is a responsive multi-page website for TechBridge's learning programs and practical internship. It is built with HTML5 and CSS3, with vanilla JavaScript for the mobile navigation, current year, and interactive internship roadmap.
+This is a responsive multi-page website for TechBridge's learning programs and practical internship. It is built with HTML5 and CSS3, with vanilla JavaScript for the mobile navigation, current year, interactive internship roadmap, Challenge Hub, and intern dashboard.
 
 ## Pages
 
@@ -10,6 +10,7 @@ This is a responsive multi-page website for TechBridge's learning programs and p
 - `programs.html` — Data Analytics and Web Development program details and skills.
 - `internship-tasks.html` — an interactive 30-day roadmap where visitors can switch between Data Analytics and Web Development and explore eight tasks for each track.
 - `challenges.html` — an interactive Challenge Hub with track and difficulty filters and an in-page detail dialog.
+- `dashboard.html` — a sample intern dashboard with a two-track task tracker, progress summary, task details, Challenge Hub preview, and interactive technology explorer.
 
 ## Web Development track
 
@@ -48,6 +49,12 @@ The Challenge Hub contains six practical examples across both tracks:
 
 Visitors can filter by track and difficulty at the same time, reset both filters, and open a challenge dialog for its objective, skills, tools, and deliverable. Challenge content is stored as JavaScript objects in `script.js` and rendered without a page refresh.
 
+## Intern Dashboard
+
+The dashboard lets a sample intern switch between Data Analytics and Web Development, view all eight track tasks, filter by task status, open task details, and mark tasks complete. Counts and the progress bar update without reloading. Per-track progress is saved in browser local storage on that device; use **Reset demo progress** to restore the sample state (two completed tasks, one in progress, and five not started). This is a frontend demo and does not use accounts or a server.
+
+The technology explorer introduces Next.js, Vue.js, Angular, and backend development. Its Backend view includes Node.js, Express.js, and Django, with links to their documentation.
+
 ## Project structure
 
 ```text
@@ -59,8 +66,10 @@ Techbridge/
 ├── programs.html
 ├── internship-tasks.html
 ├── challenges.html
+├── dashboard.html
 ├── style.css
 ├── script.js
+├── dashboard.js
 └── README.md
 ```
 
@@ -75,3 +84,4 @@ Open `index.html` in a browser. The pages link to each other using relative path
 - **Task 3:** Added an internship roadmap that presents the Web Development tasks in order and connects with the existing pages.
 - **Task 4:** Added the interactive two-track roadmap. Visitors can switch between the eight Data Analytics tasks and the eight Web Development tasks without a page refresh.
 - **Task 5:** Added the Challenge Hub with six track-specific challenges, combined track and difficulty filtering, reset controls, and an accessible detail dialog.
+- **Task 6:** Added the Intern Dashboard with task status tracking, progress calculations, status filters, task details, browser-local progress saving, a Challenge Hub link, and an interactive modern technology explorer.
